@@ -38,6 +38,7 @@ class Configuration(object):
    __UPDATE_SUMMARY = 'updateSummary'
    __UPDATE_IMPRINT = 'updateImprint'
    __UPDATE_PUBLISHER = 'updatePublisher'
+   __UPDATE_DESCRIPTION = 'updateDescription'   
    __UPDATE_VOLUME = 'updateVolume'
    __UPDATE_CHARACTERS = 'updateCharacters'
    __UPDATE_TEAMS = 'updateTeams'
@@ -102,6 +103,7 @@ class Configuration(object):
       self.update_editor_b = True # scrape comic's editor metadata
       self.update_summary_b = True # scrape comic's summary metadata
       self.update_publisher_b = True # scrape comic's publisher metadata
+      self.update_description_b = True # scrape comic's description metadata     
       self.update_imprint_b = True # scrape comic's imprint metadata
       self.update_volume_b = True # scrape comic's volume (year) metadata
       self.update_characters_b = True # scrape comic's characters metadata
@@ -408,6 +410,9 @@ class Configuration(object):
 
       if Configuration.__UPDATE_PUBLISHER in loaded:
          self.update_publisher_b = loaded[Configuration.__UPDATE_PUBLISHER]
+
+      if Configuration.__UPDATE_DESCRIPTION in loaded:
+         self.update_description_b = loaded[Configuration.__UPDATE_DESCRIPTION]
          
       if Configuration.__UPDATE_VOLUME in loaded:
          self.update_volume_b = loaded[Configuration.__UPDATE_VOLUME]
@@ -487,6 +492,7 @@ class Configuration(object):
       defaults[Configuration.__UPDATE_SUMMARY] = self.update_summary_b
       defaults[Configuration.__UPDATE_IMPRINT] = self.update_imprint_b
       defaults[Configuration.__UPDATE_PUBLISHER] = self.update_publisher_b
+      defaults[Configuration.__UPDATE_DESCRIPTION] = self.update_description_b     
       defaults[Configuration.__UPDATE_VOLUME] = self.update_volume_b
       defaults[Configuration.__UPDATE_CHARACTERS] = self.update_characters_b
       defaults[Configuration.__UPDATE_TEAMS] = self.update_teams_b
@@ -550,6 +556,7 @@ class Configuration(object):
       self.update_summary_b == other.update_summary_b and \
       self.update_imprint_b == other.update_imprint_b and \
       self.update_publisher_b == other.update_publisher_b and \
+      self.update_description_b == other.update_description_b and \   
       self.update_volume_b == other.update_volume_b and \
       self.update_characters_b == other.update_characters_b and \
       self.update_teams_b == other.update_teams_b and \
@@ -578,6 +585,7 @@ class Configuration(object):
       "\n" + \
       "[{0}] Crossovers".format(x(self.update_crossovers_b)).ljust(20) +\
       "[{0}] Publisher".format(x(self.update_publisher_b)).ljust(20) +\
+      "[{0}] Description".format(x(self.update_description_b)).ljust(20) +\      
       "[{0}] Imprint".format(x(self.update_imprint_b)).ljust(20) +\
       "\n" + \
       "[{0}] Writer".format(x(self.update_writer_b)).ljust(20) +\
