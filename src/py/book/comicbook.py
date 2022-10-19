@@ -450,6 +450,7 @@ class ComicBook(object):
        
       bd = self.__bookdata
       publisher_s = issue.publisher_s # publisher and (maybe) imprint owner
+      description_s = issue.description_s # description of series
       imprint_s = issue.imprint_s # imprint, or '' if one there isn't one
       
       # 1. the user may have defined their own custom imprint mappings.  
@@ -491,6 +492,13 @@ class ComicBook(object):
          config.ignore_blanks_b )
       if value is None: bd.dont_update("publisher_s")
       else: bd.publisher_s = value
+ 
+      # description -----------------
+      value = self.__massage_new_string("Description", description_s, \
+         bd.description_s, config.update_description_b, config.ow_existing_b, \
+         config.ignore_blanks_b )
+      if value is None: bd.dont_update("description_s")
+      else: bd.description_s = value
    
    #===========================================================================
    def __update_cover_url(self, issue):
