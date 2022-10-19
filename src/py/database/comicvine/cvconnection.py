@@ -77,7 +77,7 @@ def _query_series_details_dom(API_KEY, seriesid_s):
    # {0} is the series id, an integer.
    QUERY = 'http://comicvine.gamespot.com/api/volume/4050-{0}/?api_key=' \
      + API_KEY + __CLIENTID + '&format=xml' \
-     + '&field_list=name,start_year,publisher,image,count_of_issues,id,description'
+     + '&field_list=name,start_year,publisher,description,image,count_of_issues,id'
       # parsing relies on 'field_list' specifying 2 or more elements!!
       
    if seriesid_s is None or seriesid_s == '':
