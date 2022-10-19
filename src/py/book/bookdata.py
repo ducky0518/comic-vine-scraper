@@ -32,6 +32,7 @@ class BookData(object):
       self.__crossovers_sl = [] 
       self.__summary_s = ""
       self.__publisher_s = ""
+      self.__description_s = ""      
       self.__imprint_s = ""
       self.__characters_sl = []
       self.__teams_sl = []
@@ -297,7 +298,17 @@ class BookData(object):
       __set_publisher_s, __set_publisher_s,
       "The publisher of this book.  Not None, may be empty.")
       
-   
+      
+   #===========================================================================   
+   def __set_description_s(self, description_s = None):
+      self.__description_s = BookData.blank("description_s") \
+         if description_s is None else description_s.strip()
+      
+   description_s = property( lambda self : self.__description_s, 
+      __set_description_s, __set_description_s,
+      "The description of this book series.  Not None, may be empty.")
+      
+      
    #===========================================================================   
    def __set_characters_sl(self, characters_sl = None ):
       self.__characters_sl = \
