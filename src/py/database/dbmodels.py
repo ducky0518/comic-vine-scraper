@@ -113,7 +113,7 @@ class SeriesRef(object):
    
    #===========================================================================
    def __init__(self, series_key, series_name_s, volume_year_n, publisher_s,
-         issue_count_n, thumb_url_s):
+         description_s, issue_count_n, thumb_url_s):
       ''' 
       Initializes a newly created SeriesRef, checking the given parameters to
       make sure they are legal, and then storing them as read-only properties.
@@ -134,6 +134,9 @@ class SeriesRef(object):
          
       publisher_s --> the name of the publisher/imprint of this comic book
          series.  if the publisher is unknown, pass in '' here.
+         
+      description_s --> the description of this comic book
+         series.  if the description is unknown, pass in '' here.     
          
       issue_count_n --> the number of issues in this comic book series.  
          this value can also be a string, if so it will be automatically parsed.
@@ -157,6 +160,9 @@ class SeriesRef(object):
          
       # make sure publisher_s is a string
       self.__publisher_s = '' if not publisher_s else sstr(publisher_s).strip()
+      
+      # make sure description_s is a string
+      self.__description_s = '' if not description_s else sstr(description_s).strip()
       
       # make sure thumb_url_s is either valid, or none (but not '').
       self.__thumb_url_s =None if not thumb_url_s else sstr(thumb_url_s).strip()
@@ -188,6 +194,9 @@ class SeriesRef(object):
    
    # the publisher/imprint of this series, as a string. not None, maybe ''.
    publisher_s = property( lambda self : self.__publisher_s )
+   
+   # the description of this series, as a string. not None, maybe ''.
+   description_s = property( lambda self : self.__description_s )
    
    # the url of this series's thumbnail, as a string. may be None.
    thumb_url_s = property( lambda self : self.__thumb_url_s )
@@ -254,6 +263,7 @@ class Issue(object):
       self.title_s = ''
       self.series_name_s = ''
       self.publisher_s = ''
+      self.description_s = ''
       self.imprint_s = ''
       self.summary_s = ''
       self.webpage_s = '' 
@@ -323,6 +333,11 @@ class Issue(object):
       self.__publisher_s = '' if publisher_s == None else sstr(publisher_s)
    publisher_s = property( lambda self : self.__publisher_s, __set_publisher_s )
 
+   # the description for this Series, as a string. not None. maybe empty.
+   def __set_description_s(self, description_s):
+      ''' called when you assign a value to 'self.description_s' '''   
+      self.__description_s = '' if description_s == None else sstr(description_s)
+   description_s = property( lambda self : self.__description_s, __set_description_s )
       
    # the imprint for this Issue, as a string. not None. maybe empty.
    def __set_imprint_s(self, imprint_s):
