@@ -236,7 +236,7 @@ def __volume_to_seriesref(volume):
       volume.publisher.name
    return SeriesRef( int(volume.id), sstr(volume.name), 
       sstr(volume.start_year).rstrip("- "), # see bug 334 
-      sstr(publisher), sstr(volume.count_of_issues), __parse_image_url(volume))
+      sstr(publisher), sstr(description), sstr(volume.count_of_issues), __parse_image_url(volume))
 
 
 # ==========================================================================   
@@ -579,6 +579,7 @@ def __issue_parse_series_details(issue, dom):
    if series_id in cache:
       volume_year_n = cache[series_id][0]
       publisher_s = cache[series_id][1]
+      description_s = cache[series_id][2]
    else: 
       # contact comicvine to extract details for this comic book 
       series_dom = cvconnection._query_series_details_dom(__api_key, series_id)
@@ -596,12 +597,18 @@ def __issue_parse_series_details(issue, dom):
       
       # publisher
       publisher_s = ''
+      description_s = ''
       if "publisher" in series_dom.results.__dict__ and \
          "name" in series_dom.results.publisher.__dict__ and \
          is_string(series_dom.results.publisher.name):
          publisher_s = series_dom.results.publisher.name
+          
+      if "description" in series_dom.results.__dict__ and \
+         "name" in series_dom.results.description.__dict__ and \
+         is_string(series_dom.results.description.name):
+         publisher_s = series_dom.results.description.name
       
-      cache[series_id] = (volume_year_n, publisher_s)
+      cache[series_id] = (volume_year_n, publisher_s, description_s)
    
    # check if there's the current publisher really is the true publisher, or
    # if it's really an imprint of another publisher.
