@@ -54,6 +54,7 @@ class PluginBookData(BookData):
       self.crossovers_sl = split(crbook.AlternateSeries)
       self.summary_s = crbook.Summary
       self.publisher_s = crbook.Publisher
+      self.description_s = crbook.Description
       self.imprint_s = crbook.Imprint
       self.characters_sl = split(crbook.Characters)
       self.teams_sl = split(crbook.Teams)
@@ -146,7 +147,11 @@ class PluginBookData(BookData):
       if "publisher_s" in ok_to_update:
          self.__crbook.Publisher = self.publisher_s
          ok_to_update.remove("publisher_s")
-         
+        
+      if "description_s" in ok_to_update:
+         self.__crbook.Description = self.description_s
+         ok_to_update.remove("description_s")
+      
       if "imprint_s" in ok_to_update:
          self.__crbook.Imprint = self.imprint_s
          ok_to_update.remove("imprint_s")
